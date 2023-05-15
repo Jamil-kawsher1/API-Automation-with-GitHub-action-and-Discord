@@ -43,11 +43,11 @@ newman.run(
       const message = `:x: ${failures} API request(s) failed assertion in Postman collection \n
       ${summaryf}
       `;
-      axios.post(process.env.discord_URL, {
+      axios.post(process.env.DISCORD_URL, {
         content: message,
       });
     } else {
-      axios.post(process.env.discord_URL, {
+      axios.post(process.env.DISCORD_URL, {
         content: "All API requests passed assertion in Postman collection",
       });
     }
