@@ -43,13 +43,24 @@ newman.run(
       const message = `:x: ${failures} API request(s) failed assertion in Postman collection \n
       ${summaryf}
       `;
-      axios.post(process.env.DISCORD_URL, {
-        content: message,
-      });
-    } else {
-      axios.post(process.env.DISCORD_URL, {
-        content: "All API requests passed assertion in Postman collection",
-      });
+      //   axios.post(process.env.DISCORD_URL, {
+      //     content: message,
+      //   });
+      // } else {
+      //   axios.post(process.env.DISCORD_URL, {
+      //     content: "All API requests passed assertion in Postman collection",
+      //   });
+
+      axios
+        .post(process.env.DISCORD_URL, {
+          content: message,
+        })
+        .then(() => {
+          console.log("Discord message sent successfully");
+        })
+        .catch((error) => {
+          console.error("Error sending Discord message:", error);
+        });
     }
   }
 );
