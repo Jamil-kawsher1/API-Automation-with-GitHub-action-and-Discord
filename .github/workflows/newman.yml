@@ -23,4 +23,5 @@ jobs:
         run: npm install
 
       - name: Run Newman tests
-        run: node report.js
+        run: node report.js ${{ secrets.DISCORD_URL }}
+
