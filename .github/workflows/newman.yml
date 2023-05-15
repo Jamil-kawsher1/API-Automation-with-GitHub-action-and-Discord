@@ -4,6 +4,9 @@ on:
   workflow_dispatch:
   schedule:
     - cron: "0 0 * * *" # Run every day at 12am
+  push: # Add this trigger to run on new push events
+    branches:
+      - main
 
 env:
   DISCORD_URL: ${{ secrets.DISCORD_URL }}
