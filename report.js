@@ -15,7 +15,7 @@ newman.run(
       },
     },
   },
-  function (err, summary) {
+  async function (err, summary) {
     if (err) {
       // console.log("I am From Error!!!.............");
       // console.error(err);
@@ -37,30 +37,36 @@ newman.run(
    
      `;
 
-    if (failures > 0) {
-      console.log("I am From Summary......");
-      // console.log(summary.run);
-      const message = `:x: ${failures} API request(s) failed assertion in Postman collection \n
-      ${summaryf}
-      `;
-      //   axios.post(process.env.DISCORD_URL, {
-      //     content: message,
-      //   });
-      // } else {
-      //   axios.post(process.env.DISCORD_URL, {
-      //     content: "All API requests passed assertion in Postman collection",
-      //   });
+    // if (failures > 0) {
+    //   console.log("I am From Summary......");
+    //   // console.log(summary.run);
+    //   const message = `:x: ${failures} API request(s) failed assertion in Postman collection \n
+    //   ${summaryf}
+    //   `;
+    //   axios.post(process.env.DISCORD_URL, {
+    //     content: message,
+    //   });
+    // } else {
+    //   axios.post(process.env.DISCORD_URL, {
+    //     content: "All API requests passed assertion in Postman collection",
+    //   });
 
-      axios
-        .post(process.env.DISCORD_URL, {
+    // }
+
+    try {
+      if (failures > 0) {
+        const message = `:x: ${failures} API request(s) failed assertion in Postman collection \n\n${summaryf}`;
+        await axios.post(process.env.DISCORD_URL, {
           content: message,
-        })
-        .then(() => {
-          console.log("Discord message sent successfully");
-        })
-        .catch((error) => {
-          console.error("Error sending Discord message:", error);
         });
+      } else {
+        await axios.post(process.env.DISCORD_URL, {
+          content: "All API requests passed assertion in Postman collection",
+        });
+      }
+      console.log("Discord message sent successfully");
+    } catch (error) {
+      console.error("Error sending Discord message:", error);
     }
   }
 );
