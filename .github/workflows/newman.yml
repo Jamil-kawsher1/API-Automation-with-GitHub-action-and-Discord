@@ -3,7 +3,10 @@ name: Newman Test
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *' # Run every day at 12am
+    - cron: "0 0 * * *" # Run every day at 12am
+
+env:
+  DISCORD_URL: ${{ secrets.DISCORD_URL }}
 
 jobs:
   postman-test:
@@ -17,11 +20,10 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '14'
+          node-version: "14"
 
       - name: Install dependencies
         run: npm install
 
       - name: Run Newman tests
         run: node report.js ${{ secrets.DISCORD_URL }}
-
