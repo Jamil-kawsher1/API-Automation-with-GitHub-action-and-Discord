@@ -23,4 +23,4 @@ jobs:
         run: npm install
 
       - name: Run Newman tests
-        run: npm run report.js
+        run: node report.js
