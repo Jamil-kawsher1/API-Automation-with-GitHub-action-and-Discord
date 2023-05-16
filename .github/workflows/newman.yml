@@ -1,5 +1,3 @@
-name: Newman Test
-
 on:
   workflow_dispatch:
   schedule:
@@ -30,3 +28,9 @@ jobs:
 
       - name: Run Newman tests
         run: node report.js ${{ secrets.DISCORD_URL }}
+
+      - name: Upload report.html to repository #Uploading Html File to Github Repo
+        uses: actions/upload-artifact@v2
+        with:
+          name: Newman Test Report
+          path: ./Reports/report.html
