@@ -1,8 +1,16 @@
 const axios = require("axios");
 const newman = require("newman");
 require("dotenv").config();
+const mkdirp = require("mkdirp");
 
 const fs = require("fs");
+
+// Specify the export path for the HTML report
+const exportPath = "./Reports/report.html";
+
+// Create the necessary directories if they don't exist
+mkdirp.sync("./Reports");
+
 // Run the API tests using Newman
 newman.run(
   {
@@ -11,7 +19,7 @@ newman.run(
     reporters: ["cli", "htmlextra"],
     reporter: {
       htmlextra: {
-        export: "./Reports/report.html", // If not specified, the file will be written to `newman/` in the current working directory.
+        export: exportPath,
       },
     },
   },
@@ -24,7 +32,6 @@ newman.run(
 
     // Check if any test has failed
     const failures = summary.run.failures.length;
-    //stats
 
     // Extract stats
     const { stats } = summary.run;
@@ -36,22 +43,6 @@ newman.run(
      Failed Assertion:${failures}
    
      `;
-
-    // if (failures > 0) {
-    //   console.log("I am From Summary......");
-    //   // console.log(summary.run);
-    //   const message = `:x: ${failures} API request(s) failed assertion in Postman collection \n
-    //   ${summaryf}
-    //   `;
-    //   axios.post(process.env.DISCORD_URL, {
-    //     content: message,
-    //   });
-    // } else {
-    //   axios.post(process.env.DISCORD_URL, {
-    //     content: "All API requests passed assertion in Postman collection",
-    //   });
-
-    // }
 
     try {
       if (failures > 0) {
