@@ -13,7 +13,18 @@ In this repository, you will find the code implementation and configuration file
 ## Author
 
 - [@Jamil-kawsher1](https://www.github.com/Jamil-kawsher1)
-## Automation Video
+
+## Automation Video Github Action Enviroment
+
+
+https://github.com/Jamil-kawsher1/API-Automation-with-GitHub-action-and-Discord/assets/42008531/dc0f6971-61ec-4a57-9321-bb62ccb3e011
+
+
+
+## Automation Video Local Enviroment
+
+https://github.com/Jamil-kawsher1/API-Automation-with-GitHub-action-and-Discord/assets/42008531/51790090-0200-453c-86ce-d8cc6a9bdd69
+
 
 
 
